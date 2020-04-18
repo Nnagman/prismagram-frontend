@@ -4,3 +4,5 @@ git push -u origin master
 npm install styled-components, react-router-dom, graphql, react-apollo-hooks, apollo-boost, react-helmet
 
 npm install styled-reset
+
+npm install react-toastify
