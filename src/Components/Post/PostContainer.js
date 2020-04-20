@@ -53,8 +53,7 @@ const PostContainer = ({
 
   const onKeyPress = async (event) => {
     const { which } = event;
-    const { keyCode } = e;
-    if (keyCode === 13) {
+    if (which === 13) {
       event.preventDefault();
       try {
         const {
