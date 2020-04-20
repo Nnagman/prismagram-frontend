@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import useInput from "../../Hooks/useInput";
 import PostPresenter from "./PostPresenter";
-import { useMutation } from "react-apollo-hooks";
+import { useMutation } from "@apollo/react-hooks";
 import { TOGGLE_LIKE, ADD_COMMENT } from "./PostQueries";
 import { toast } from "react-toastify";
 
@@ -28,17 +28,23 @@ const PostContainer = ({
   const addCommentMutation = useMutation(ADD_COMMENT, {
     variables: { postId: id, text: comment.value },
   });
-  const slide = () => {
+  //   const slide = () => {
+  //     const totalFiles = files.length;
+  //     if (currentItem === totalFiles - 1) {
+  //       setTimeout(() => setCurrentItem(0), 3000);
+  //     } else {
+  //       setTimeout(() => setCurrentItem(currentItem + 1), 3000);
+  //     }
+  //   };
+  useEffect(() => {
+    //slide()
     const totalFiles = files.length;
     if (currentItem === totalFiles - 1) {
       setTimeout(() => setCurrentItem(0), 3000);
     } else {
       setTimeout(() => setCurrentItem(currentItem + 1), 3000);
     }
-  };
-  useEffect(() => {
-    slide();
-  }, [currentItem]);
+  }, [currentItem, files]);
 
   const toggleLike = () => {
     toggleLikeMutation();
@@ -65,7 +71,6 @@ const PostContainer = ({
         toast.error("Cant send comment");
       }
     }
-    return;
   };
 
   return (
