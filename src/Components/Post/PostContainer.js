@@ -22,12 +22,22 @@ const PostContainer = ({
   const [currentItem, setCurrentItem] = useState(0);
   const [selfComments, setSelfComments] = useState([]);
   const comment = useInput("");
-  const toggleLikeMutation = useMutation(TOGGLE_LIKE, {
+  const [toggleLikeMutation] = useMutation(TOGGLE_LIKE, {
     variables: { postId: id },
   });
-  const addCommentMutation = useMutation(ADD_COMMENT, {
+  const [addCommentMutation] = useMutation(ADD_COMMENT, {
     variables: { postId: id, text: comment.value },
   });
+
+  useEffect(() => {
+    const totalFiles = files.length;
+    if (currentItem === totalFiles - 1) {
+      setTimeout(() => setCurrentItem(0), 3000);
+    } else {
+      setTimeout(() => setCurrentItem(currentItem + 1), 3000);
+    }
+  }, [currentItem, files]);
+
   //   const slide = () => {
   //     const totalFiles = files.length;
   //     if (currentItem === totalFiles - 1) {
@@ -36,15 +46,9 @@ const PostContainer = ({
   //       setTimeout(() => setCurrentItem(currentItem + 1), 3000);
   //     }
   //   };
-  useEffect(() => {
-    //slide()
-    const totalFiles = files.length;
-    if (currentItem === totalFiles - 1) {
-      setTimeout(() => setCurrentItem(0), 3000);
-    } else {
-      setTimeout(() => setCurrentItem(currentItem + 1), 3000);
-    }
-  }, [currentItem, files]);
+  //   useEffect(() => {
+  //     slide();
+  //   }, [currentItem]);
 
   const toggleLike = () => {
     toggleLikeMutation();
